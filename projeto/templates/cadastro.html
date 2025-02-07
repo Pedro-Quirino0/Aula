@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Cadastro</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="style.css">
+      <style>
+      body {
+         background: linear-gradient(to bottom, #e3f2fd, #90caf9);
+         font-family: Times New Roman, sans-serif;
+         position: relative;
+         width: 100%;
+         height: 100vh;
+         padding: 100px 0;
+         }
+      .btn-custom {
+         background-color: #1976d2;
+         color: #fff;
+         }
+      .btn-custom:hover {
+         background-color: #1565c0;
+         }
+      footer {
+         position: fixed;
+         bottom: 0;
+         left: 0;
+         width: 100%;
+         background-color: #1565c0;
+         color: white;
+         text-align: center;
+         padding: 15px 0;
+      }
+      .btn-group{
+         position: relative;
+         padding: 10px 10px;
+         font-size: 16px;
+         border: none;
+         cursor: pointer;
+         gap: 10px 20px;
+      }
+      h2{
+         font-size: 3.5rem;
+      }
+      label{
+         font-size: 1.5rem;
+      }
+      .form-control{
+         font-size: 1.2rem;
+      }
+ </style>
+</head>
+<body>
+ <div id="cadastro" class="container mt-5">
+     <h2 class="text-center mb-4">Cadastro de Usuários</h2>
+     <form method="POST">
+         {{ form.csrf_token }}
+         <div class="mb-3">
+             <label class="form-label">Nome Completo:</label>
+             {{ form.nome(type="nome", class="form-control", id="nome", placeholder="Digite seu nome") }}
+         </div>
+         <div class="mb-3">
+             <label class="form-label">E-mail:</label>
+             {{ form.email(class="form-control", id="email", placeholder="Digite seu e-mail") }}
+         </div>
+         <div class="mb-3">
+             <label class="form-label">Idade:</label>
+             {{ form.idade(class="form-control", id="idade", placeholder="Digite sua idade") }}
+         </div>
+         <div class="mb-3">
+             <label class="form-label">Feedback:</label>
+             {{ form.feedback(class="form-control", id="feedback", placeholder="Digite seu feedback") }}
+         </div>
+         <form>
+             <div class="btn-group">
+                 <div>
+                     {{ form.botao_confirmar(id="popoverButton", class="btn btn-custom") }}
+                 </div>
+             </form>
+             <form action="sensor2.html">
+                 <div>
+                     <a href="{{url_for('homepage')}}" class="btn btn-secondary">Voltar</a>
+                 </div>
+             </div>
+         </form>
+     </form>
+ </div>
+   <!-- Popover -->
+<div id="customPopover" class="popover fade show position-fixed top-50 start-50 translate-middle p-3" style="z-index: 1050; display: none;">
+ <h3 class="popover-header">Salvar</h3>
+ <div class="popover-body">
+   Salvo com sucesso!
+ </div>
+ <div class="text-end mt-2">
+   <button class="btn btn-secondary btn-sm" id="closePopover">Fechar</button>
+ </div>
+</div>
+
+ <footer>
+     <p>&copy; 2025 Projeto de Tecnologia Assistiva. Todos os direitos reservados.</p>
+ </footer>
+     <script>
+     // Alternar entre as telas
+     document.querySelectorAll('a').forEach(link => {
+         link.addEventListener('click', function (event) {
+             event.preventDefault();
+             const targetId = this.getAttribute('href').replace('#', '');
+             document.querySelectorAll('div[id]').forEach(div => {
+                 div.style.display = div.id === targetId ? 'block' : 'none';
+             });
+         });
+     });
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+ // Seleção dos elementos
+ const popover = document.getElementById('customPopover');
+ const button = document.getElementById('popoverButton');
+ const closeButton = document.getElementById('closePopover');
+
+ // Exibir o popover ao clicar no botão
+ button.addEventListener('click', () => {
+   popover.style.display = 'block';
+ });
+
+ // Fechar o popover ao clicar no botão "Fechar"
+ closeButton.addEventListener('click', () => {
+   popover.style.display = 'none';
+ });
+</script>
+</body>
+</html>
